@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f0f0;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #calculator {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    input[type="button"] {
+      width: 60px;
+      height: 60px;
+      font-size: 18px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #e0e0e0;
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="button"]:hover {
+      background-color: #d1d1d1;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 10px);
+      height: 40px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      border: none;
+      padding: 5px;
+      box-sizing: border-box;
+      color: #000;
+      background-color: #e0e0e0;
+    }
+    
+  </style>
+
+</head>
+<body> 
+
+<!-- Onlcick eshte pjese e DOM-it -->
+
+<div id="calculator">
+    <input type="text" id="display" readonly>
+    <br>
+    <input type="button" value="1" onclick="calculator.addToDisplay('1')">
+    <input type="button" value="2" onclick="calculator.addToDisplay('2')">
+    <input type="button" value="3" onclick="calculator.addToDisplay('3')">
+    <input type="button" value="/" onclick="calculator.addToDisplay('/')">
+    <br>
+    <input type="button" value="4" onclick="calculator.addToDisplay('4')">
+    <input type="button" value="5" onclick="calculator.addToDisplay('5')">
+    <input type="button" value="6" onclick="calculator.addToDisplay('6')">
+    <input type="button" value="-" onclick="calculator.addToDisplay('-')">
+    <br>
+    <input type="button" value="7" onclick="calculator.addToDisplay('7')">
+    <input type="button" value="8" onclick="calculator.addToDisplay('8')">
+    <input type="button" value="9" onclick="calculator.addToDisplay('9')">
+    <input type="button" value="+" onclick="calculator.addToDisplay('+')">
+    <br>
+    <input type="button" value="C" onclick="calculator.clearDisplay()">
+    <input type="button" value="0" onclick="calculator.addToDisplay('0')">
+    <input type="button" value="=" onclick="calculator.calculate()">
+    <input type="button" value="*" onclick="calculator.addToDisplay('*')">
+  </div>
+
+    
+
+<script>
+// Kur u krijua klasa Calculator, u be enkapsulimi
+// Klasa Calculator i ka metodat si "addToDisplay", "clearDisplay", "calculate"
+class Calculator {
+  constructor() {
+    // Ketu behet pjesa e DOM-it sipas "getElementById"
+    this.display = document.getElementById('display');
+    this.expression = '';
+  }
+
+  addToDisplay(value) {
+    this.expression += value;
+    this.display.value = this.expression;
+  }
+
+  clearDisplay() {
+    this.expression = '';
+    this.display.value = '';
+  }
+
+  calculate() {
+    try {
+      this.expression = eval(this.expression);
+      this.display.value = this.expression;
+    } catch (error) {
+      this.display.value = 'Error';
+    }
+  }
+}
+
+// Ketu behet objekti/klasa "Calculator"
+const calculator = new Calculator();
+</script>
+
+</body>
+</html>
